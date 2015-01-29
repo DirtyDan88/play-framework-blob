@@ -19,6 +19,21 @@ public class Application extends Controller {
             ));
     }
     
+    public static Result getImage(long id) {
+        Image image = Image.find.byId(id);
+        
+        if (image != null) {
+            
+            /*** here happens the magic ***/
+            return ok(image.data).as("image");
+            /************************** ***/
+            
+        } else {
+            flash("error", "Picture not found.");
+            return redirect(routes.Application.index());
+        }
+    }
+    
     public static Result uploadImage() {
         Form<UploadImageForm> form = form(UploadImageForm.class).bindFromRequest();
         
@@ -51,18 +66,6 @@ public class Application extends Controller {
             }
             
             return null;
-        }
-    }
-    
-    public static Result getImage(long id) {
-        Image image = Image.find.byId(id);
-        
-        if (image != null) {
-            return ok(image.data).as("image");
-            
-        } else {
-            flash("error", "Picture not found.");
-            return redirect(routes.Application.index());
         }
     }
 }
