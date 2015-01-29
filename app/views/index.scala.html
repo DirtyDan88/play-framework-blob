@@ -1,0 +1,37 @@
+@(form: Form[Application.UploadImageForm], listImages: List[Image])
+
+@main("Play! Framework :: store and load BLOBs") {
+    @if(form.hasGlobalErrors) {
+        <div style="color: red;">
+            <strong>Oh noo!</strong> @form.globalError.message
+        </div>
+    }
+    @if(flash.contains("error")) {
+        <div style="color: red;">
+            <strong>Oh noo!</strong> @flash.get("error")
+        </div>
+    }
+    @if(flash.contains("success")) {
+        <div style="color: green;">
+            <strong>Well done!</strong> @flash.get("success")
+        </div>
+    }
+    
+    <div>
+        <h1>Upload a new image:</h1>
+        @helper.form(action = routes.Application.uploadImage, 'enctype -> "multipart/form-data") {
+            <input type="file" class="" accept=".jpg, .png, .bmp" name="image">
+            <button type="submit">Upload image!</button>
+        }
+    </div>
+    
+    <div>
+        <h1>Images in Database:</h1>
+        @for(image <- listImages) {
+            <h3>@image.name</h3>
+            <a href="@routes.Application.getImage(image.id)" target="blank">
+                <img src="@routes.Application.getImage(image.id)">
+            </a>
+        }
+    </div>
+}
