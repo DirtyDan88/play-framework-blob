@@ -2,7 +2,7 @@
 
 I recently had the problem to upload and store images with java play framework 
 (version 2.3.x) as BLOB. Uploading and shoveling the data in a byte-array was 
-a piece of cake, but getting the data back into an <img>-tag was not that 
+a piece of cake, but getting the data back into an image-tag was not that 
 straight forward at first sight.
 
 Internet research showed me, that I am not the first person who had to deal with 
